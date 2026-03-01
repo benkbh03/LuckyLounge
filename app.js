@@ -1,4 +1,3 @@
-// ====== Core Variables =======
 let user = null;
 let balance = 0;
 let sessionStart = null;
@@ -19,12 +18,12 @@ function login() {
     user = username;
     balance = 100;
     sessionStart = new Date();
-    // UI Updates
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('dashboard-section').style.display = 'block';
     document.getElementById('display-username').textContent = user;
     updateBalance();
     startSessionTimer();
+    resetGameSection();
 }
 
 function logout() {
@@ -107,6 +106,14 @@ function showGame(type) {
             <button onclick="playDice()">Roll Dice</button>
             <div id="dice-result"></div>
         `;
+    } else if (type === 'plinko') {
+        section.innerHTML = `
+            <h4>Plinko</h4>
+            <p>Play for $4 per drop. Reach the best prize at the bottom!</p>
+            <button onclick="playPlinko()">Drop Ball</button>
+            <div id="plinko-board"></div>
+            <div id="plinko-result"></div>
+        `;
     }
 }
 
@@ -146,6 +153,70 @@ function playDice() {
     document.getElementById('dice-result').textContent = result;
 }
 
+// ====== PLINKO GAME =======
+const PLINKO_COLUMNS = 7;
+const PLINKO_ROWS = 7;
+const PLINKO_PRIZES = [0, 8, 12, 50, 12, 8, 0]; // The prizes at the bottom
+
+function playPlinko() {
+    if (balance < 4) {
+        showToast("Not enough balance for Plinko.");
+        return;
+    }
+    balance -= 4;
+    updateBalance();
+
+    let boardHTML = "";
+    let col = Math.floor(PLINKO_COLUMNS / 2); // start in the middle
+    let path = [col];
+
+    // Simulate the ball bouncing left/right down each row
+    for (let r = 0; r < PLINKO_ROWS; r++) {
+        // Random left (-1) or right (+1)
+        const direction = Math.random() < 0.5 ? -1 : 1;
+        col += direction;
+        col = Math.max(0, Math.min(PLINKO_COLUMNS - 1, col));
+        path.push(col);
+    }
+
+    // Build a simple board visualization using emojis or text
+    for (let r = 0; r <= PLINKO_ROWS; r++) {
+        let rowStr = "";
+        for (let c = 0; c < PLINKO_COLUMNS; c++) {
+            if (c === path[r]) {
+                rowStr += "🔵 "; // Ball position
+            } else {
+                rowStr += "⚪ "; // Peg
+            }
+        }
+        boardHTML += rowStr + "<br>";
+    }
+    // Prize display row
+    let prizeRow = "";
+    for (let i = 0; i < PLINKO_PRIZES.length; i++) {
+        if (PLINKO_PRIZES[i] > 0)
+            prizeRow += "$" + PLINKO_PRIZES[i].toString().padEnd(2) + " ";
+        else
+            prizeRow += "💀      ";
+    }
+    boardHTML += prizeRow;
+
+    document.getElementById('plinko-board').innerHTML = boardHTML;
+
+    // Show prize result
+    const finalCol = path[path.length - 1];
+    const prize = PLINKO_PRIZES[finalCol];
+    if (prize > 0) {
+        balance += prize;
+        updateBalance();
+        document.getElementById('plinko-result').textContent =
+            `🎊 Plinko Ball landed in slot $${prize}! You won $${prize}.`;
+    } else {
+        document.getElementById('plinko-result').textContent =
+            `Oh no! The ball landed in a skull slot. No prize.`;
+    }
+}
+
 // ====== RESPONSIBLE GAMBLING =======
 function selfExclude() {
     selfExcluded = true;
@@ -173,5 +244,3 @@ function showToast(message) {
         toast.remove();
     }, 2000);
 }
-
-// Optional: Dismiss game section when logging out or self-excluding
