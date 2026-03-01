@@ -15,11 +15,16 @@ h2 {
   text-align:center;
   color: #17e9e1;
 }
+label {
+  margin: 12px 0;
+  display: inline-block;
+  font-size: 1.02em;
+}
 button {
   display: block;
   margin: 12px auto 18px auto;
   padding: 10px 30px;
-  font-size: 1.2em;
+  font-size: 1.18em;
   background: linear-gradient(90deg, #17e9e1, #9f50ff);
   border:none;
   border-radius:10px;
@@ -30,6 +35,14 @@ button {
 }
 button:hover {
   background: linear-gradient(90deg,#9f50ff,#17e9e1);
+}
+input[type="number"] {
+  border-radius:5px;
+  border:1px solid #17e9e1;
+  background: #1b1f3c;
+  color: #e1eaff;
+  padding: 6px;
+  margin-left: 5px;
 }
 #plinko-board-container {
   margin: 12px auto 8px auto;
