@@ -118,7 +118,6 @@ function showGame(type) {
     }
 }
 
-// ---- Slot Machine UI + Spin Logic ----
 const slotSymbols = ['🍒','🍋','🍊','🍎','🍉','⭐','💎'];
 function playSlotUI() {
     if (balance < 5) {
@@ -173,7 +172,6 @@ function playSlotUI() {
     animateReels();
 }
 
-// ---- Dice UI (SVG) + Roll Logic ----
 function renderDiceFace(face) {
     const pips = [
         [],
@@ -221,7 +219,6 @@ function playDiceUI() {
     rollDiceAnim();
 }
 
-// ---- Plinko UI & Animation ----
 const PLINKO_COLUMNS = 7;
 const PLINKO_ROWS = 8;
 const PLINKO_PRIZES = [0,8,12,50,12,8,0];
