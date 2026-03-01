@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LuckyLounge - Responsible Gambling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="app">
+        <!-- Header -->
+        <header>
+            <h1>LuckyLounge</h1>
+            <p>Ethical & Responsible Gambling for Everyone</p>
+        </header>
+
+        <!-- Login Section -->
+        <section id="login-section">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Enter your username">
+            <button onclick="login()">Login</button>
+        </section>
+
+        <!-- Main Dashboard -->
+        <section id="dashboard-section" style="display:none;">
+            <h2>Welcome, <span id="display-username"></span>!</h2>
+            <div>
+                <strong>Balance:</strong> $<span id="balance"></span>
+            </div>
+            <div id="session-timer"></div>
+            <button onclick="logout()">Logout</button>
+            <hr>
+
+            <!-- Deposit/Credit -->
+            <h3>Deposit or Buy Credits</h3>
+            <input type="number" id="deposit-amount" placeholder="Amount">
+            <button onclick="deposit()">Deposit</button>
+
+            <!-- Withdrawal -->
+            <h3>Withdraw</h3>
+            <input type="number" id="withdraw-amount" placeholder="Amount">
+            <button onclick="withdraw()">Withdraw</button>
+
+            <!-- Games Lobby -->
+            <h3>Games</h3>
+            <button onclick="showGame('slot')">Slot Machine</button>
+            <button onclick="showGame('dice')">Dice Game</button>
+            <div id="game-section"></div>
+            <hr>
+
+            <!-- Responsible Gambling -->
+            <h3>Play Responsibly</h3>
+            <button onclick="selfExclude()">Self-Exclude</button>
+            <p>For support:
+                <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a>
+            </p>
+        </section>
+    </main>
+
+    <!-- Link to your app.js script -->
+    <script src="app.js"></script>
+</body>
+</html>
