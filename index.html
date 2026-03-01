@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Plinko Visual Demo</title>
+  <title>Plinko Visual Demo With Betting</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main id="app">
     <h2>Plinko Game</h2>
+    <div>
+      <strong>Balance:</strong> $<span id="balance"></span>
+    </div>
+    <label>
+      Bet amount: $
+      <input type="number" id="bet-amount" min="1" value="5" style="width:60px;">
+    </label>
     <button onclick="playPlinko()">Drop Ball</button>
     <div id="plinko-board-container"></div>
     <div id="plinko-result"></div>
