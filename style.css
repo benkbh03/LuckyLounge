@@ -1,0 +1,124 @@
+/* Stake.com Inspired Style for LuckyLounge */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #232242 0%, #13121E 100%);
+    color: #f6f6f6;
+}
+
+main#app {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 24px;
+    background: rgba(28, 32, 53, 0.97);
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(0,3,46,0.18);
+    position: relative;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #17e9e1, #9f50ff, #17e9e1 80%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+
+h2, h3 {
+    color: #17e9e1;
+    margin-top: 22px;
+    margin-bottom: 8px;
+}
+
+hr {
+    border: none;
+    height: 1.5px;
+    background: linear-gradient(90deg, #17e9e1 30%, #9f50ff 70%);
+    margin: 20px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    background: #1b1f3c;
+    color: #f6f6f6;
+    border: 1.5px solid #17e9e1;
+    margin-bottom: 10px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color .2s;
+}
+
+input:focus {
+    border-color: #9f50ff;
+}
+
+button {
+    background: linear-gradient(90deg, #17e9e1 30%, #9f50ff 100%);
+    color: #13121E;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    font-size: 1em;
+    width: 100%;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background .2s;
+    box-shadow: 0 2px 8px rgba(23,233,225,0.12);
+}
+
+button:hover {
+    background: linear-gradient(90deg, #9f50ff 0%, #17e9e1 100%);
+    color: #fff;
+}
+
+#session-timer {
+    font-size: 0.96em;
+    color: #ff6bfa;
+    margin-top: 8px;
+    text-shadow: 0 0 8px #9f50ff33;
+}
+
+#game-section {
+    margin-top: 12px;
+    background: rgba(23, 233, 225, 0.06);
+    padding: 12px;
+    border-radius: 10px;
+    min-height: 38px;
+    font-size: 1.09em;
+}
+
+a {
+    color: #17e9e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .2s;
+}
+
+a:hover {
+    color: #9f50ff;
+    text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: #232242;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9f50ff;
+    border-radius: 8px;
+}
