@@ -2,23 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Plinko Visual Demo With Betting</title>
+  <title>LuckyLounge - Casino Games</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main id="app">
-    <h2>Plinko Game</h2>
-    <div>
+<main id="app">
+  <header>
+    <h1>LuckyLounge</h1>
+    <p>Ethical & Responsible Gambling for Everyone</p>
+  </header>
+  <section id="dashboard-section">
+    <div style="margin-bottom:15px;">
       <strong>Balance:</strong> $<span id="balance"></span>
     </div>
-    <label>
-      Bet amount: $
+    <label style="margin-bottom:10px;">Bet amount:
       <input type="number" id="bet-amount" min="1" value="5" style="width:60px;">
     </label>
-    <button onclick="playPlinko()">Drop Ball</button>
-    <div id="plinko-board-container"></div>
-    <div id="plinko-result"></div>
-  </main>
-  <script src="plinko.js"></script>
+    <hr/>
+    <div class="game-buttons">
+      <button onclick="showGame('slot')">Slot Machine</button>
+      <button onclick="showGame('dice')">Dice Game</button>
+      <button onclick="showGame('plinko')">Plinko</button>
+    </div>
+    <div id="game-section"></div>
+    <hr/>
+    <button onclick="resetBalance()" style="margin-top:10px;">Reset Balance</button>
+    <div style="margin-top:8px;font-size:.97em;">For support: <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a></div>
+  </section>
+</main>
+<script src="app.js"></script>
 </body>
 </html>
