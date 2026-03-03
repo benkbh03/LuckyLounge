@@ -11,48 +11,99 @@ main#app {
   border-radius: 18px;
   box-shadow: 0 6px 24px #0002;
 }
+h1 {
+  font-size: 2rem;
+  text-align:center;
+  background: linear-gradient(90deg, #17e9e1, #9f50ff, #17e9e1 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
 h2 {
   text-align:center;
   color: #17e9e1;
 }
-label {
-  margin: 12px 0;
-  display: inline-block;
-  font-size: 1.02em;
-}
 button {
-  display: block;
-  margin: 12px auto 18px auto;
-  padding: 10px 30px;
-  font-size: 1.18em;
-  background: linear-gradient(90deg, #17e9e1, #9f50ff);
+  margin: 8px 3px 15px 2px;
+  padding: 10px 20px;
+  font-size: 1em;
+  background: linear-gradient(90deg, #17e9e1, #9f50ff );
   border:none;
-  border-radius:10px;
-  color:#19192c;
+  border-radius:9px;
+  color:#13121e;
   font-weight:bold;
-  cursor:pointer;
+  cursor: pointer;
   box-shadow: 0 2px 8px #17e9e155;
+  transition: background .16s;
 }
-button:hover {
-  background: linear-gradient(90deg,#9f50ff,#17e9e1);
-}
+button:hover { background: linear-gradient(90deg, #9f50ff, #17e9e1 ); }
 input[type="number"] {
   border-radius:5px;
-  border:1px solid #17e9e1;
+  border:1.3px solid #17e9e1;
   background: #1b1f3c;
   color: #e1eaff;
-  padding: 6px;
+  padding: 7px;
   margin-left: 5px;
+  margin-right:4px;
 }
-#plinko-board-container {
-  margin: 12px auto 8px auto;
-}
-.plinko-board {
-  display: grid;
-  grid-template-columns: repeat(7,36px);
-  grid-gap: 2px;
+.game-buttons {
+  display: flex;
+  gap: 7px;
   justify-content:center;
 }
+#game-section { margin:18px auto 4px auto; min-height: 155px; }
+/* --- Slot visuals --- */
+.slot-reels {
+  display: flex;
+  justify-content: center;
+  gap: 17px;
+  margin: 17px 0 10px 0;
+  height: 70px;
+}
+.slot-reel {
+  width: 62px;
+  height: 69px;
+  background: linear-gradient(135deg, #2b215c 80%, #9f50ff1c);
+  border-radius: 13px;
+  color: #fff;
+  font-size: 2.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 18px rgba(23,233,225,.12);
+  border: 2.5px solid #17e9e1;
+  transition: box-shadow .2s, border-color .2s;
+}
+.slot-reel.jackpot { box-shadow: 0 0 32px #17e9e1,0 0 18px #fffa57; border-color: #fffa57; }
+.slot-anim { animation: slotspin 0.21s linear 1; }
+@keyframes slotspin {
+  0% {transform:scaleY(1);}
+  35% {transform:scaleY(0.5);}
+  65% {transform:scaleY(1.4);}
+  100% {transform:scaleY(1);}
+}
+/* --- Dice --- */
+.dice-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto 5px auto;
+}
+.dice-svg {
+  width: 62px; height: 62px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 18px #17e9e117;
+  background: linear-gradient(135deg,#232242,#1b1f3c 85%);
+}
+.dice-svg .dot { fill: #17e9e1; }
+.dice-svg.jackpot { box-shadow: 0 0 32px #17e9e1,0 0 20px #9f50ff; }
+/* --- Plinko --- */
+.plinko-board { display: grid; grid-template-columns: repeat(7, 36px); grid-gap: 2px; justify-content:center; }
 .plinko-cell {
   width:36px;height:36px;
   background:#3d2e72;
@@ -91,9 +142,12 @@ input[type="number"] {
 }
 .plinko-prize-cell.jackpot {background: linear-gradient(90deg,#17e9e1,#fffa57); color:#232242; border-color: #fffa57;}
 .plinko-skull { color: #ff3c82; background: #291f2a;}
-#plinko-result {
-  text-align:center;
-  font-size: 1.17em;
-  min-height: 2em;
-  margin-top: 7px;
+a {
+  color: #17e9e1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .2s;
 }
+a:hover { color: #9f50ff; text-decoration: underline; }
+::-webkit-scrollbar { width:8px; background: #232242; }
+::-webkit-scrollbar-thumb { background: #9f50ff; border-radius:8px; }
