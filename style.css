@@ -7,7 +7,7 @@ main#app {
   max-width: 425px;
   margin: 40px auto;
   padding: 32px 18px;
-  background:#232242;
+  background:#90EE90;
   border-radius: 18px;
   box-shadow: 0 6px 24px #0002;
 }
@@ -56,29 +56,27 @@ input[type="number"] {
   justify-content:center;
 }
 #game-section { margin:18px auto 4px auto; min-height: 155px; }
-/* --- Slot visuals --- */
+
+/* Slot */
 .slot-reels {
   display: flex;
   justify-content: center;
-  gap: 17px;
-  margin: 17px 0 10px 0;
-  height: 70px;
+  gap: 12px;
+  margin: 18px 0;
 }
 .slot-reel {
-  width: 62px;
-  height: 69px;
-  background: linear-gradient(135deg, #2b215c 80%, #9f50ff1c);
-  border-radius: 13px;
-  color: #fff;
-  font-size: 2.8em;
+  width: 60px; height: 60px;
+  font-size: 2.4em;
+  background:#1b1f3c;
+  border-radius: 15px;
+  box-shadow: 0 2px 20px #17e9e122, 0 0px 2px #9f50ff32;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 18px rgba(23,233,225,.12);
-  border: 2.5px solid #17e9e1;
-  transition: box-shadow .2s, border-color .2s;
+  transition: background .16s;
+  border: 3.5px solid #9f50ff22;
 }
-.slot-reel.jackpot { box-shadow: 0 0 32px #17e9e1,0 0 18px #fffa57; border-color: #fffa57; }
+.jackpot { box-shadow: 0 0 32px #17e9e1,0 0 20px #9f50ff; border-color:#17e9e1 !important;}
 .slot-anim { animation: slotspin 0.21s linear 1; }
 @keyframes slotspin {
   0% {transform:scaleY(1);}
@@ -86,7 +84,8 @@ input[type="number"] {
   65% {transform:scaleY(1.4);}
   100% {transform:scaleY(1);}
 }
-/* --- Dice --- */
+
+/* Dice */
 .dice-face {
   display: flex;
   align-items: center;
@@ -102,7 +101,8 @@ input[type="number"] {
 }
 .dice-svg .dot { fill: #17e9e1; }
 .dice-svg.jackpot { box-shadow: 0 0 32px #17e9e1,0 0 20px #9f50ff; }
-/* --- Plinko --- */
+
+/* Plinko */
 .plinko-board { display: grid; grid-template-columns: repeat(7, 36px); grid-gap: 2px; justify-content:center; }
 .plinko-cell {
   width:36px;height:36px;
@@ -130,24 +130,69 @@ input[type="number"] {
   margin-top: 8px;
 }
 .plinko-prize-cell {
+  height: 23px;
   text-align:center;
-  color:#fff;
+  background: #180e2f;
+  border-radius: 8px;
+  font-size: .97em;
+  color: #e1eaff;
   font-weight:bold;
-  background: linear-gradient(90deg,#413193,#232242);
-  border-radius:13px;
-  border:2px solid #17e9e1;
-  margin-bottom:6px;
-  padding:6px 3px;
-  transition: border-color .2s;
+  box-shadow:0 2px 8px #17e9e111 inset;
 }
-.plinko-prize-cell.jackpot {background: linear-gradient(90deg,#17e9e1,#fffa57); color:#232242; border-color: #fffa57;}
-.plinko-skull { color: #ff3c82; background: #291f2a;}
-a {
-  color: #17e9e1;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color .2s;
+.plinko-prize-cell.jackpot {background:#17e9e1; color:#19192c;}
+.plinko-prize-cell.plinko-skull {background: #d80025; color: #fff;}
+
+/* ----- ROULETTE ----- */
+.roulette-board { 
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items:center;
+  margin: 14px 0 7px 0;
 }
-a:hover { color: #9f50ff; text-decoration: underline; }
-::-webkit-scrollbar { width:8px; background: #232242; }
-::-webkit-scrollbar-thumb { background: #9f50ff; border-radius:8px; }
+.roulette-board-row {
+  display: flex;
+  gap: 7px;
+}
+.roulette-num-btn {
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  font-weight:bold;
+  cursor:pointer;
+  text-align:center;
+  font-size:1em;
+  border:none;
+  margin:0;
+  background: #252545;
+  box-shadow: 0 1px 7px #9f50ff19;
+  transition: box-shadow .15s, background .19s;
+  outline: none;
+}
+
+.roulette-num-btn.red { background:linear-gradient(135deg,#dd1133,#ff4c70 78%); color:#fff;}
+.roulette-num-btn.black { background:linear-gradient(134deg,#231f30,#464349 80%); color:#fff;}
+
+.roulette-num-btn.roulette-bet,
+.roulette-color.roulette-bet {
+  box-shadow: 0 0 14px #fed474, 0 0 6px #17e9e1;
+  border:2.5px solid #fed474;
+}
+.roulette-num-btn.roulette-selected {
+  box-shadow:0 0 13px #17e9e1,0 0 7px #9f50ff;
+  border:2.5px solid #17e9e1;
+  z-index:5;
+}
+
+/* Bets color btns and result */
+.roulette-bets {
+  display:flex;
+  justify-content: center;
+  gap:18px;
+  margin-bottom:7px;
+}
+.roulette-color.red{background:linear-gradient(90deg,#ee1133,#ffb199);color:#fff;}
+.roulette-color.black{background:linear-gradient(90deg,#232242,#444);color:#fff;}
+#roulette-result {
+  text-align: center; margin:3px 0 0 0; font-weight:bold; letter-spacing:.5px;
+}
