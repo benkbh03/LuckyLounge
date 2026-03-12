@@ -4,6 +4,31 @@
   <meta charset="UTF-8">
   <title>LuckyLounge - Casino Games</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .bet-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .max-btn {
+      padding: 7px 16px;
+      font-size: 0.9em;
+      background: transparent;
+      border: 2px solid #ff3c82;
+      border-radius: 9px;
+      color: #ff3c82;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ff3c8244;
+      transition: background .16s, color .16s;
+      margin: 0;
+    }
+    .max-btn:hover {
+      background: #ff3c82;
+      color: #13121e;
+    }
+  </style>
 </head>
 <body>
 <main id="app">
@@ -20,9 +45,12 @@
     <div style="margin-bottom:15px;">
       <strong>Balance:</strong> $<span id="balance"></span>
     </div>
-    <label style="margin-bottom:10px;">Bet amount:
-      <input type="number" id="bet-amount" min="1" value="5" style="width:60px;">
-    </label>
+    <div class="bet-row">
+      <label>Bet amount:
+        <input type="number" id="bet-amount" min="1" value="5" style="width:60px;">
+      </label>
+      <button class="max-btn" onclick="setMaxBet()">Max</button>
+    </div>
     <hr/>
     <div class="game-buttons">
       <button onclick="showGame('slot')">Slot Machine</button>
