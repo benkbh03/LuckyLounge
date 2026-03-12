@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LuckyLounge - Login</title>
+  <style>
+    body {
+      background: #19192c;
+      color: #e1eaff;
+      font-family: Segoe UI, Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    main#app {
+      max-width: 425px;
+      margin: 40px auto;
+      padding: 32px 18px;
+      background: #232242;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px #0002;
+    }
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      background: linear-gradient(90deg, #17e9e1, #9f50ff, #17e9e1 80%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    header p {
+      text-align: center;
+      color: #9f50ff;
+      margin: 0 0 24px 0;
+      font-size: 0.95em;
+    }
+    .tab-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid #17e9e1;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px 0;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      background: #1b1f3c;
+      color: #e1eaff;
+      transition: background .16s, color .16s;
+      border-radius: 0;
+      margin: 0;
+      box-shadow: none;
+    }
+    .tab-btn.active {
+      background: linear-gradient(90deg, #17e9e1, #9f50ff);
+      color: #13121e;
+    }
+    .tab-btn:hover:not(.active) {
+      background: #2b215c;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      font-size: 0.88em;
+      color: #17e9e1;
+      margin-bottom: 5px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .form-group input {
+      border-radius: 8px;
+      border: 1.5px solid #17e9e1;
+      background: #1b1f3c;
+      color: #e1eaff;
+      padding: 10px 12px;
+      font-size: 1em;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    .form-group input:focus {
+      border-color: #9f50ff;
+      box-shadow: 0 0 0 3px #9f50ff28;
+    }
+    .submit-btn {
+      width: 100%;
+      margin: 8px 0 0 0;
+      padding: 12px 0;
+      font-size: 1.05em;
+      background: linear-gradient(90deg, #17e9e1, #9f50ff);
+      border: none;
+      border-radius: 9px;
+      color: #13121e;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #17e9e155;
+      transition: background .16s;
+      letter-spacing: 0.5px;
+    }
+    .submit-btn:hover {
+      background: linear-gradient(90deg, #9f50ff, #17e9e1);
+    }
+    .forgot-link {
+      display: block;
+      text-align: right;
+      margin-top: 6px;
+      font-size: 0.85em;
+      color: #17e9e1;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .forgot-link:hover { color: #9f50ff; text-decoration: underline; }
+    .divider {
+      border: none;
+      border-top: 1px solid #2b2a4a;
+      margin: 20px 0;
+    }
+    .status-msg {
+      min-height: 1.4em;
+      text-align: center;
+      font-size: 0.95em;
+      margin-top: 10px;
+      border-radius: 7px;
+      padding: 6px 10px;
+      display: none;
+    }
+    .status-msg.error {
+      display: block;
+      background: #2a1220;
+      color: #ff3c82;
+      border: 1px solid #ff3c8244;
+    }
+    .status-msg.success {
+      display: block;
+      background: #122a29;
+      color: #17e9e1;
+      border: 1px solid #17e9e144;
+    }
+    .password-wrapper {
+      position: relative;
+    }
+    .password-wrapper input {
+      width: 100%;
+      box-sizing: border-box;
+      padding-right: 44px;
+    }
+    .toggle-pw {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #9f50ff;
+      cursor: pointer;
+      font-size: 1.1em;
+      padding: 0;
+      margin: 0;
+      box-shadow: none;
+      line-height: 1;
+    }
+    .toggle-pw:hover { color: #17e9e1; background: none; }
+    .terms-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-size: 0.87em;
+      color: #9ca8c8;
+    }
+    .terms-row input[type="checkbox"] {
+      accent-color: #17e9e1;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+    .terms-row a { color: #17e9e1; }
+    .responsible-note {
+      margin-top: 14px;
+      font-size: .87em;
+      text-align: center;
+      color: #7a7a9a;
+    }
+    .responsible-note a { color: #17e9e1; }
+    ::-webkit-scrollbar { width: 8px; background: #232242; }
+    ::-webkit-scrollbar-thumb { background: #9f50ff; border-radius: 8px; }
+
+    /* panel fade animation */
+    .panel { animation: fadeIn .22s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+<main id="app">
+  <header>
+    <h1>LuckyLounge</h1>
+    <p>Ethical &amp; Responsible Gambling for Everyone</p>
+  </header>
+
+  <div class="tab-row">
+    <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Login</button>
+    <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Register</button>
+  </div>
+
+  <!-- LOGIN PANEL -->
+  <div id="panel-login" class="panel">
+    <div class="form-group">
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" placeholder="you@example.com" autocomplete="username">
+    </div>
+    <div class="form-group">
+      <label for="login-password">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password">
+        <button class="toggle-pw" onclick="togglePw('login-password', this)" tabindex="-1">👁</button>
+      </div>
+    </div>
+    <a href="#" class="forgot-link">Forgot password?</a>
+    <button class="submit-btn" onclick="handleLogin()">Login</button>
+    <div class="status-msg" id="login-msg"></div>
+  </div>
+
+  <!-- REGISTER PANEL -->
+  <div id="panel-register" class="panel" style="display:none;">
+    <div class="form-group">
+      <label for="reg-username">Username</label>
+      <input type="text" id="reg-username" placeholder="Choose a username" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="reg-email">Email</label>
+      <input type="email" id="reg-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label for="reg-password">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="reg-password" placeholder="Min. 8 characters" autocomplete="new-password">
+        <button class="toggle-pw" onclick="togglePw('reg-password', this)" tabindex="-1">👁</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="reg-password2">Confirm Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="reg-password2" placeholder="Repeat password" autocomplete="new-password">
+        <button class="toggle-pw" onclick="togglePw('reg-password2', this)" tabindex="-1">👁</button>
+      </div>
+    </div>
+    <div class="terms-row">
+      <input type="checkbox" id="terms-check">
+      <label for="terms-check">I am 18+ and accept the <a href="#">Terms &amp; Conditions</a></label>
+    </div>
+    <button class="submit-btn" onclick="handleRegister()">Create Account</button>
+    <div class="status-msg" id="register-msg"></div>
+  </div>
+
+  <hr class="divider">
+  <div class="responsible-note">
+    Spiller du for meget? <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">Registrer dig i ROFUS</a>
+  </div>
+</main>
+
+<script>
+  // --- Tab switching ---
+  function switchTab(tab) {
+    document.getElementById('panel-login').style.display    = tab === 'login'    ? '' : 'none';
+    document.getElementById('panel-register').style.display = tab === 'register' ? '' : 'none';
+    document.getElementById('tab-login').classList.toggle('active',    tab === 'login');
+    document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+    // re-trigger fade
+    const panel = document.getElementById('panel-' + tab);
+    panel.classList.remove('panel');
+    void panel.offsetWidth;
+    panel.classList.add('panel');
+    clearMessages();
+  }
+
+  // --- Show/hide password ---
+  function togglePw(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const show  = input.type === 'password';
+    input.type  = show ? 'text' : 'password';
+    btn.textContent = show ? '🙈' : '👁';
+  }
+
+  // --- Message helper ---
+  function showMsg(id, text, type) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.className = 'status-msg ' + type;
+  }
+  function clearMessages() {
+    ['login-msg','register-msg'].forEach(id => {
+      const el = document.getElementById(id);
+      el.className = 'status-msg';
+      el.textContent = '';
+    });
+  }
+
+  // --- Simple localStorage user store ---
+  function getUsers() {
+    return JSON.parse(localStorage.getItem('ll_users') || '{}');
+  }
+  function saveUsers(users) {
+    localStorage.setItem('ll_users', JSON.stringify(users));
+  }
+
+  // --- Login ---
+  function handleLogin() {
+    const email    = document.getElementById('login-email').value.trim().toLowerCase();
+    const password = document.getElementById('login-password').value;
+
+    if (!email || !password) {
+      showMsg('login-msg', '⚠️ Please fill in all fields.', 'error'); return;
+    }
+    const users = getUsers();
+    if (!users[email]) {
+      showMsg('login-msg', '❌ No account found with that email.', 'error'); return;
+    }
+    if (users[email].password !== password) {
+      showMsg('login-msg', '❌ Incorrect password.', 'error'); return;
+    }
+
+    showMsg('login-msg', `✅ Welcome back, ${users[email].username}! Redirecting…`, 'success');
+    // Store session
+    sessionStorage.setItem('ll_user', JSON.stringify({ email, username: users[email].username }));
+    setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+  }
+
+  // --- Register ---
+  function handleRegister() {
+    const username  = document.getElementById('reg-username').value.trim();
+    const email     = document.getElementById('reg-email').value.trim().toLowerCase();
+    const password  = document.getElementById('reg-password').value;
+    const password2 = document.getElementById('reg-password2').value;
+    const terms     = document.getElementById('terms-check').checked;
+
+    if (!username || !email || !password || !password2) {
+      showMsg('register-msg', '⚠️ Please fill in all fields.', 'error'); return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showMsg('register-msg', '⚠️ Please enter a valid email address.', 'error'); return;
+    }
+    if (password.length < 8) {
+      showMsg('register-msg', '⚠️ Password must be at least 8 characters.', 'error'); return;
+    }
+    if (password !== password2) {
+      showMsg('register-msg', '❌ Passwords do not match.', 'error'); return;
+    }
+    if (!terms) {
+      showMsg('register-msg', '⚠️ You must accept the Terms & Conditions.', 'error'); return;
+    }
+
+    const users = getUsers();
+    if (users[email]) {
+      showMsg('register-msg', '❌ An account with that email already exists.', 'error'); return;
+    }
+
+    users[email] = { username, password };
+    saveUsers(users);
+
+    showMsg('register-msg', `✅ Account created! Switching to login…`, 'success');
+    setTimeout(() => {
+      switchTab('login');
+      document.getElementById('login-email').value = email;
+    }, 1100);
+  }
+
+  // --- Check if already logged in ---
+  window.onload = () => {
+    const user = sessionStorage.getItem('ll_user');
+    if (user) window.location.href = 'index.html';
+  };
+</script>
+</body>
+</html>
