@@ -32,10 +32,7 @@ function showGame(type) {
                 <div class="slot-reel" id="reel2">🍋</div>
                 <div class="slot-reel" id="reel3">🍊</div>
             </div>
-            <div style="display:flex;gap:7px;justify-content:center;">
-                <button id="slot-spin-btn">Spin</button>
-                <button onclick="setMaxBet()">Max</button>
-            </div>
+            <button id="slot-spin-btn">Spin</button>
             <div id="slot-result" style="text-align:center;min-height:1.5em;"></div>
         `;
         document.getElementById('slot-spin-btn').onclick = playSlotUI;
@@ -43,10 +40,7 @@ function showGame(type) {
         section.innerHTML = `
             <h4>Dice Game</h4>
             <div class="dice-face" id="dice-face"></div>
-            <div style="display:flex;gap:7px;justify-content:center;">
-                <button id="dice-roll-btn">Roll Dice</button>
-                <button onclick="setMaxBet()">Max</button>
-            </div>
+            <button id="dice-roll-btn">Roll Dice</button>
             <div id="dice-result" style="text-align:center;min-height:1.4em;"></div>
         `;
         renderDiceFace(1);
@@ -55,10 +49,7 @@ function showGame(type) {
         section.innerHTML = `
             <h4>Plinko</h4>
             <div id="plinko-board-container"></div>
-            <div style="display:flex;gap:7px;justify-content:center;">
-                <button id="plinko-drop-btn">Drop Ball</button>
-                <button onclick="setMaxBet()">Max</button>
-            </div>
+            <button id="plinko-drop-btn">Drop Ball</button>
             <div id="plinko-result"></div>
         `;
         renderPlinkoBoard(null);
