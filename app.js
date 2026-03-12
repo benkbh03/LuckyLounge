@@ -20,7 +20,6 @@ function resetBalance() {
     document.getElementById('game-section').innerHTML = '';
 }
 
-// --- UI Main game loader ---
 function showGame(type) {
     const section = document.getElementById('game-section');
     section.innerHTML = "";
@@ -57,7 +56,6 @@ function showGame(type) {
     }
 }
 
-// --- Slot logic ---
 const slotSymbols = ['🍒', '🍋', '🍊', '🍎', '🍉', '⭐', '💎'];
 
 function playSlotUI() {
@@ -108,7 +106,6 @@ function playSlotUI() {
     animateReels();
 }
 
-// --- Dice logic (SVG) ---
 function renderDiceFace(face) {
     const pips = [
         [], [[1,1]], [[0,0],[2,2]], [[0,0],[1,1],[2,2]], [[0,0],[0,2],[2,0],[2,2]],
@@ -150,7 +147,6 @@ function playDiceUI() {
     rollDiceAnim();
 }
 
-// --- Plinko ---
 const PLINKO_COLUMNS = 7, PLINKO_ROWS = 8, PLINKO_PRIZES = [0, 8, 12, 50, 12, 8, 0];
 
 function renderPlinkoBoard(ballPath = null) {
