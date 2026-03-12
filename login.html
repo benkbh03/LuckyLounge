@@ -63,9 +63,7 @@
       background: linear-gradient(90deg, #17e9e1, #9f50ff);
       color: #13121e;
     }
-    .tab-btn:hover:not(.active) {
-      background: #2b215c;
-    }
+    .tab-btn:hover:not(.active) { background: #2b215c; }
     .form-group {
       display: flex;
       flex-direction: column;
@@ -87,6 +85,8 @@
       font-size: 1em;
       outline: none;
       transition: border-color .18s, box-shadow .18s;
+      box-sizing: border-box;
+      width: 100%;
     }
     .form-group input:focus {
       border-color: #9f50ff;
@@ -107,9 +107,7 @@
       transition: background .16s;
       letter-spacing: 0.5px;
     }
-    .submit-btn:hover {
-      background: linear-gradient(90deg, #9f50ff, #17e9e1);
-    }
+    .submit-btn:hover { background: linear-gradient(90deg, #9f50ff, #17e9e1); }
     .forgot-link {
       display: block;
       text-align: right;
@@ -147,14 +145,8 @@
       color: #17e9e1;
       border: 1px solid #17e9e144;
     }
-    .password-wrapper {
-      position: relative;
-    }
-    .password-wrapper input {
-      width: 100%;
-      box-sizing: border-box;
-      padding-right: 44px;
-    }
+    .password-wrapper { position: relative; }
+    .password-wrapper input { padding-right: 44px; }
     .toggle-pw {
       position: absolute;
       right: 10px;
@@ -181,8 +173,7 @@
     }
     .terms-row input[type="checkbox"] {
       accent-color: #17e9e1;
-      width: 15px;
-      height: 15px;
+      width: 15px; height: 15px;
       cursor: pointer;
     }
     .terms-row a { color: #17e9e1; }
@@ -191,12 +182,24 @@
       font-size: .87em;
       text-align: center;
       color: #7a7a9a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .responsible-note a { color: #17e9e1; }
+    .rofus-logo {
+      height: 36px;
+      width: auto;
+      border-radius: 5px;
+      vertical-align: middle;
+      opacity: 0.85;
+      transition: opacity .2s;
+    }
+    .rofus-logo:hover { opacity: 1; }
     ::-webkit-scrollbar { width: 8px; background: #232242; }
     ::-webkit-scrollbar-thumb { background: #9f50ff; border-radius: 8px; }
-
-    /* panel fade animation */
     .panel { animation: fadeIn .22s ease; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(8px); }
@@ -268,18 +271,30 @@
 
   <hr class="divider">
   <div class="responsible-note">
-    Spiller du for meget? <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">Registrer dig i ROFUS</a>
+    <span>Spiller du for meget?</span>
+    <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">
+      <img
+        class="rofus-logo"
+        src="https://www.spillemyndigheden.dk/uploads/styles/cropped_style/public/2018-12/spm-m%C3%A6rket-centered_0.jpg?itok=l9rOKFnd"
+        alt="Registrer dig i ROFUS"
+      >
+    </a>
+    <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">Registrer dig i ROFUS</a>
   </div>
 </main>
 
 <script>
-  // --- Tab switching ---
+  (function() {
+    if (sessionStorage.getItem('ll_user')) {
+      window.location.href = 'index.html';
+    }
+  })();
+
   function switchTab(tab) {
     document.getElementById('panel-login').style.display    = tab === 'login'    ? '' : 'none';
     document.getElementById('panel-register').style.display = tab === 'register' ? '' : 'none';
     document.getElementById('tab-login').classList.toggle('active',    tab === 'login');
     document.getElementById('tab-register').classList.toggle('active', tab === 'register');
-    // re-trigger fade
     const panel = document.getElementById('panel-' + tab);
     panel.classList.remove('panel');
     void panel.offsetWidth;
@@ -287,7 +302,6 @@
     clearMessages();
   }
 
-  // --- Show/hide password ---
   function togglePw(inputId, btn) {
     const input = document.getElementById(inputId);
     const show  = input.type === 'password';
@@ -295,7 +309,6 @@
     btn.textContent = show ? '🙈' : '👁';
   }
 
-  // --- Message helper ---
   function showMsg(id, text, type) {
     const el = document.getElementById(id);
     el.textContent = text;
@@ -309,7 +322,6 @@
     });
   }
 
-  // --- Simple localStorage user store ---
   function getUsers() {
     return JSON.parse(localStorage.getItem('ll_users') || '{}');
   }
@@ -317,11 +329,9 @@
     localStorage.setItem('ll_users', JSON.stringify(users));
   }
 
-  // --- Login ---
   function handleLogin() {
     const email    = document.getElementById('login-email').value.trim().toLowerCase();
     const password = document.getElementById('login-password').value;
-
     if (!email || !password) {
       showMsg('login-msg', '⚠️ Please fill in all fields.', 'error'); return;
     }
@@ -332,21 +342,17 @@
     if (users[email].password !== password) {
       showMsg('login-msg', '❌ Incorrect password.', 'error'); return;
     }
-
     showMsg('login-msg', `✅ Welcome back, ${users[email].username}! Redirecting…`, 'success');
-    // Store session
     sessionStorage.setItem('ll_user', JSON.stringify({ email, username: users[email].username }));
     setTimeout(() => { window.location.href = 'index.html'; }, 1200);
   }
 
-  // --- Register ---
   function handleRegister() {
     const username  = document.getElementById('reg-username').value.trim();
     const email     = document.getElementById('reg-email').value.trim().toLowerCase();
     const password  = document.getElementById('reg-password').value;
     const password2 = document.getElementById('reg-password2').value;
     const terms     = document.getElementById('terms-check').checked;
-
     if (!username || !email || !password || !password2) {
       showMsg('register-msg', '⚠️ Please fill in all fields.', 'error'); return;
     }
@@ -362,27 +368,18 @@
     if (!terms) {
       showMsg('register-msg', '⚠️ You must accept the Terms & Conditions.', 'error'); return;
     }
-
     const users = getUsers();
     if (users[email]) {
       showMsg('register-msg', '❌ An account with that email already exists.', 'error'); return;
     }
-
     users[email] = { username, password };
     saveUsers(users);
-
     showMsg('register-msg', `✅ Account created! Switching to login…`, 'success');
     setTimeout(() => {
       switchTab('login');
       document.getElementById('login-email').value = email;
     }, 1100);
   }
-
-  // --- Check if already logged in ---
-  window.onload = () => {
-    const user = sessionStorage.getItem('ll_user');
-    if (user) window.location.href = 'index.html';
-  };
 </script>
 </body>
 </html>
