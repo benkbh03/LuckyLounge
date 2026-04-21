@@ -314,16 +314,61 @@ function showResult(id, text) {
     document.getElementById(id).textContent = text;
 }
 
-function requireLoggedInUser() {
+function getCurrentUser() {
     const user = sessionStorage.getItem('ll_user');
 
     if (!user) {
-        window.location.href = 'login.html';
+        return null;
+    }
+
+    try {
+        return JSON.parse(user);
+    } catch (error) {
+        sessionStorage.removeItem('ll_user');
+        return null;
+    }
+}
+
+function updateUserBar(user) {
+    const greetingEl = document.getElementById('user-greeting');
+    const labelEl = document.querySelector('.account-label');
+    const logoutLink = document.getElementById('logout-link');
+
+    if (!greetingEl || !labelEl) {
         return;
     }
 
-    const parsed = JSON.parse(user);
-    document.getElementById('user-greeting').textContent = parsed.username;
+    if (user) {
+        labelEl.textContent = 'Signed in';
+        greetingEl.textContent = user.username;
+
+        if (logoutLink) {
+            logoutLink.textContent = 'Logout';
+            logoutLink.setAttribute('href', '#');
+        }
+
+        return;
+    }
+
+    labelEl.textContent = 'Guest';
+    greetingEl.textContent = 'Browse games';
+
+    if (logoutLink) {
+        logoutLink.textContent = 'Login';
+        logoutLink.setAttribute('href', 'login.html');
+    }
+}
+
+function requireLoggedInUser() {
+    const user = getCurrentUser();
+
+    if (!user) {
+        window.location.href = 'login.html';
+        return null;
+    }
+
+    updateUserBar(user);
+    return user;
 }
 
 function logout(event) {
@@ -365,10 +410,19 @@ function setupWalletPage() {
 }
 
 function setupApp() {
-    requireLoggedInUser();
+    const requiresAuth = document.body.dataset.requiresAuth === 'true';
+    const currentUser = getCurrentUser();
+
+    if (requiresAuth && !requireLoggedInUser()) {
+        return;
+    }
+
+    if (!requiresAuth) {
+        updateUserBar(currentUser);
+    }
 
     const logoutLink = document.getElementById('logout-link');
-    if (logoutLink) {
+    if (logoutLink && currentUser) {
         logoutLink.addEventListener('click', logout);
     }
 
