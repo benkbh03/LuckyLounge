@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuckyLounge - Dice Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body data-game-page="dice" data-requires-auth="true">
+  <main id="app" class="game-app">
+    <header>
+      <h1>LuckyLounge</h1>
+      <p>Dice Game</p>
+      <div id="user-bar" class="user-bar">
+        <div class="account-pill">
+          <span class="account-label">Signed in</span>
+          <strong id="user-greeting"></strong>
+        </div>
+        <nav class="account-actions" aria-label="Account actions">
+          <a class="account-link" href="wallet.html">Virtual money</a>
+          <a class="account-link logout-link" href="#" id="logout-link">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="game-page-intro">
+      <a class="back-link" href="index.html">Back to frontpage</a>
+      <p class="eyebrow">Play money only</p>
+      <h2>Dice Game</h2>
+      <p>
+        Roll one die with virtual money. A six gives the best return, but every
+        roll is random and should be treated as entertainment.
+      </p>
+    </section>
+
+    <section class="responsible-mini">
+      <strong>Responsible play:</strong>
+      Take breaks and keep bets small.
+      <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">ROFUS</a>
+    </section>
+
+    <section id="dashboard-section">
+      <div class="play-controls">
+        <div class="balance-row">
+          <strong>Virtual balance:</strong> $<span id="balance"></span>
+        </div>
+
+        <div class="bet-row">
+          <label for="bet-amount">Bet amount:</label>
+          <input type="number" id="bet-amount" class="bet-input" min="1" value="5">
+          <button id="max-bet-btn" class="max-btn">Max</button>
+        </div>
+      </div>
+
+      <div id="game-section" aria-live="polite"></div>
+    </section>
+  </main>
+</body>
+</html>
