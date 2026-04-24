@@ -1,9 +1,11 @@
+// Sends already signed-in users away from the auth page.
 function redirectLoggedInUser() {
     if (sessionStorage.getItem('ll_user')) {
         window.location.href = 'index.html';
     }
 }
 
+// Switches between the login and register panels.
 function switchTab(tab) {
     document.getElementById('panel-login').classList.toggle('is-hidden', tab !== 'login');
     document.getElementById('panel-register').classList.toggle('is-hidden', tab !== 'register');
@@ -18,6 +20,7 @@ function switchTab(tab) {
     clearMessages();
 }
 
+// Toggles password visibility for a chosen password field.
 function togglePw(inputId, button) {
     const input = document.getElementById(inputId);
     const show = input.type === 'password';
@@ -26,12 +29,14 @@ function togglePw(inputId, button) {
     button.textContent = show ? 'Hide' : 'Show';
 }
 
+// Shows a short success or error message under a form.
 function showMsg(id, text, type) {
     const el = document.getElementById(id);
     el.textContent = text;
     el.className = 'status-msg ' + type;
 }
 
+// Resets both auth form status messages.
 function clearMessages() {
     ['login-msg', 'register-msg'].forEach(id => {
         const el = document.getElementById(id);
@@ -40,34 +45,41 @@ function clearMessages() {
     });
 }
 
+// Opens the terms and conditions modal.
 function openTerms(event) {
     event.preventDefault();
     document.getElementById('terms-modal').classList.add('open');
 }
 
+// Closes the terms and conditions modal.
 function closeTerms() {
     document.getElementById('terms-modal').classList.remove('open');
 }
 
+// Closes the modal when the user clicks the overlay outside the box.
 function closeTermsOutside(event) {
     if (event.target === document.getElementById('terms-modal')) {
         closeTerms();
     }
 }
 
+// Accepts the terms checkbox from inside the modal and closes it.
 function acceptTerms() {
     document.getElementById('terms-check').checked = true;
     closeTerms();
 }
 
+// Reads the locally stored user database.
 function getUsers() {
     return JSON.parse(localStorage.getItem('ll_users') || '{}');
 }
 
+// Saves the locally stored user database.
 function saveUsers(users) {
     localStorage.setItem('ll_users', JSON.stringify(users));
 }
 
+// Validates login credentials and creates a session for the matching user.
 function handleLogin() {
     const email = document.getElementById('login-email').value.trim().toLowerCase();
     const password = document.getElementById('login-password').value;
@@ -97,6 +109,7 @@ function handleLogin() {
     }, 1200);
 }
 
+// Validates registration fields and stores a new local account.
 function handleRegister() {
     const username = document.getElementById('reg-username').value.trim();
     const email = document.getElementById('reg-email').value.trim().toLowerCase();
@@ -146,6 +159,7 @@ function handleRegister() {
     }, 1100);
 }
 
+// Connects all login, register, and modal interactions on the auth page.
 function setupLoginPage() {
     redirectLoggedInUser();
 
@@ -165,4 +179,5 @@ function setupLoginPage() {
     document.getElementById('terms-accept').addEventListener('click', acceptTerms);
 }
 
+// Starts the login page behavior once the page markup is ready.
 document.addEventListener('DOMContentLoaded', setupLoginPage);
