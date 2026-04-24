@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic page metadata and shared homepage assets. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuckyLounge - Casino Games</title>
+  <title>LuckyLounge - Responsible Game Selection</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
-<body>
+<body class="frontpage-body">
   <main id="app">
+    <!-- Top brand and account area shown on the homepage. -->
     <header>
-      <h1>LuckyLounge</h1>
+      <h1><a href="index.html">LuckyLounge</a></h1>
       <p>Ethical &amp; Responsible Gambling for Everyone</p>
       <div id="user-bar" class="user-bar">
         <div class="account-pill">
@@ -18,81 +20,37 @@
           <strong id="user-greeting"></strong>
         </div>
         <nav class="account-actions" aria-label="Account actions">
-          <a class="account-link" href="wallet.html">Virtual money</a>
+          <span class="timer-pill">Timer <strong>00:17:38</strong></span>
+          <a class="account-link balance-link" href="wallet.html">
+            <span class="account-icon" aria-hidden="true">▣</span>
+            <span>Balance <strong>$<span id="balance"></span></strong></span>
+          </a>
           <a class="account-link logout-link" href="#" id="logout-link">Logout</a>
         </nav>
       </div>
     </header>
 
+    <!-- Main homepage content with intro text, safety banner, and game cards. -->
     <section id="frontpage-section">
+      <!-- Hero message that frames the site around responsible play. -->
       <div class="intro-panel">
-        <p class="eyebrow">Play money only</p>
-        <h2>Choose a game before you play</h2>
+        <h2>Play <span>responsibly</span></h2>
         <p>
-          LuckyLounge is for short entertainment with virtual money. Pick a game,
-          set a small limit, and stop when it stops being fun.
+          Designed for people, not profit.
+          <br>
+          Set your limits, take breaks, and enjoy the games.
         </p>
       </div>
 
-      <div class="game-preview-grid" aria-label="Available games">
-        <article class="game-card">
-          <div class="game-card-art slot-art" aria-hidden="true">
-            <span>&#127826;</span>
-            <span>&#11088;</span>
-            <span>&#128142;</span>
-          </div>
-          <h3>Slot Machine</h3>
-          <p>Spin three reels. Matching symbols can return a virtual prize.</p>
-          <a class="game-choice-btn" href="slot.html">Open Slot Machine</a>
-        </article>
-
-        <article class="game-card">
-          <div class="game-card-art dice-art" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <h3>Dice Game</h3>
-          <p>Roll one die. Rolling a six gives the highest virtual payout.</p>
-          <a class="game-choice-btn" href="dice.html">Open Dice Game</a>
-        </article>
-
-        <article class="game-card">
-          <div class="game-card-art plinko-art" aria-hidden="true">
-            <div class="preview-plinko-row">
-              <span></span>
-            </div>
-            <div class="preview-plinko-row">
-              <span></span>
-              <span></span>
-            </div>
-            <div class="preview-plinko-row">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="preview-plinko-row">
-              <strong>20x</strong>
-              <strong>Lose</strong>
-              <strong>20x</strong>
-            </div>
-          </div>
-          <h3>Plinko</h3>
-          <p>Drop the ball through the board and see which prize slot it reaches.</p>
-          <a class="game-choice-btn" href="plinko.html">Open Plinko</a>
-        </article>
-      </div>
-
+      <!-- Responsible gambling notice with a direct link to ROFUS. -->
       <aside class="responsible-panel">
+        <div class="responsible-icon" aria-hidden="true">◆</div>
         <div>
           <p class="eyebrow">Important</p>
           <h2>ROFUS and responsible play</h2>
           <p>
             If gambling starts to feel stressful, hard to control, or no longer fun,
-            take a break and use official help tools.
+            take a break and use official protection tools before you continue.
           </p>
         </div>
         <a class="rofus-card" href="https://www.spillemyndigheden.dk/rofus" target="_blank">
@@ -102,12 +60,82 @@
           <span>Go to ROFUS</span>
         </a>
       </aside>
+
+      <!-- Overview cards that link to each available game. -->
+      <div class="game-preview-grid" aria-label="Available games">
+        <article class="game-card">
+          <div class="game-card-art slot-art" aria-hidden="true">
+            <div class="slot-machine-preview">
+              <span class="slot-preview-reel">&#127826;</span>
+              <span class="slot-preview-reel">&#11088;</span>
+              <span class="slot-preview-reel">&#128142;</span>
+              <div class="slot-lever"></div>
+            </div>
+          </div>
+          <h3>Slot Machine</h3>
+          <p>Spin three simple reels with virtual money and a fixed limit.</p>
+          <a class="game-choice-btn" href="slot.html">Open Slot Machine</a>
+        </article>
+
+        <article class="game-card">
+          <div class="game-card-art dice-art" aria-hidden="true">
+            <div class="simple-dice-preview">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <h3>Dice Game</h3>
+          <p>Can you hit a 6? - Try it out</p>
+          <a class="game-choice-btn" href="dice.html">Open Dice Game</a>
+        </article>
+
+        <article class="game-card">
+          <div class="game-card-art plinko-art" aria-hidden="true">
+            <div class="plinko-preview-board">
+              <div class="preview-plinko-row"><span></span></div>
+              <div class="preview-plinko-row"><span></span><span></span></div>
+              <div class="preview-plinko-row"><span></span><span></span><span></span></div>
+              <div class="preview-plinko-row"><span></span><span></span><span></span><span></span></div>
+              <div class="preview-plinko-prizes">
+                <strong>20x</strong>
+                <strong>Lose</strong>
+                <strong>20x</strong>
+              </div>
+            </div>
+          </div>
+          <h3>Plinko</h3>
+          <p>Drop the ball through a quiet board and keep each round small.</p>
+          <a class="game-choice-btn" href="plinko.html">Open Plinko</a>
+        </article>
+      </div>
     </section>
 
+    <!-- Quick links to supporting pages and player safety information. -->
     <nav class="frontpage-nav" aria-label="Project links">
-      <a href="wallet.html">Add virtual money</a>
-      <a href="about.html">About the project</a>
-      <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">ROFUS</a>
+      <a href="about.html">
+        <span class="nav-icon" aria-hidden="true">◷</span>
+        <strong>Play for fun</strong>
+        <span>This is play money only.</span>
+      </a>
+      <a href="wallet.html">
+        <span class="nav-icon" aria-hidden="true">◒</span>
+        <strong>Set your limits</strong>
+        <span>Edit play money and balance limits.</span>
+      </a>
+      <a href="about.html">
+        <span class="nav-icon" aria-hidden="true">□</span>
+        <strong>Take breaks</strong>
+        <span>Pause and come back when you want.</span>
+      </a>
+      <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">
+        <span class="nav-icon" aria-hidden="true">◔</span>
+        <strong>Need help?</strong>
+        <span>Use official tools and support.</span>
+      </a>
     </nav>
   </main>
 </body>
