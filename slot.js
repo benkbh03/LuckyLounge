@@ -1,3 +1,4 @@
+// Legacy standalone slot-machine canvas setup.
 const canvas = document.getElementById('slotCanvas');
 const ctx = canvas.getContext('2d');
 const btn = document.getElementById('spinBtn');
@@ -6,10 +7,11 @@ const symbols = ['🍒','🍋','🍊','🍎','🍉','⭐','💎'];
 let reels = [0,0,0];
 let isSpinning = false;
 
-// Simple sound for win/lose
+// Simple audio effects for spinning and winning.
 const winSound = new Audio("https://cdn.pixabay.com/audio/2022/10/16/audio_12b3fa3c25.mp3"); // Free short "win" sound
 const spinSound = new Audio("https://cdn.pixabay.com/audio/2022/09/27/audio_12335db34f.mp3"); // Free short "spin" sound
 
+// Draws the three slot reels on the canvas and optionally highlights a jackpot.
 function drawReels(vals, highlight=false) {
     ctx.clearRect(0,0,canvas.width,canvas.height);
     for(let i=0;i<3;i++) {
@@ -29,6 +31,7 @@ function drawReels(vals, highlight=false) {
 }
 drawReels([0,1,2]);
 
+// Starts the spin animation and shows the final slot result.
 btn.onclick = function() {
     if(isSpinning) return;
     isSpinning = true;
@@ -51,7 +54,7 @@ btn.onclick = function() {
             reels = [val1, val2, val3];
             let resSyms = [val1, val2, val3].map(i=>symbols[i]);
             drawReels([val1,val2,val3], resSyms.every((v,i,a)=>v===a[0]));
-            // Win logic
+            // Chooses the final message based on the ending reel combination.
             let result = '';
             if(resSyms.every((v,i,a)=>v===a[0])) {
                 winSound.play();
