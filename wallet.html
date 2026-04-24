@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic metadata plus the shared stylesheet and app logic. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LuckyLounge - Virtual Money</title>
@@ -9,46 +10,66 @@
 </head>
 <body data-requires-auth="true">
   <main id="app" class="auth-app">
+    <!-- Shared header with account actions for the wallet page. -->
     <header>
-      <h1>LuckyLounge</h1>
-      <p>Virtual money only</p>
+      <h1><a href="index.html">LuckyLounge</a></h1>
+      <p>Your balance</p>
       <div id="user-bar" class="user-bar">
         <div class="account-pill">
           <span class="account-label">Signed in</span>
           <strong id="user-greeting"></strong>
         </div>
         <nav class="account-actions" aria-label="Account actions">
+          <span class="timer-pill">Timer <strong>00:17:38</strong></span>
           <a class="account-link" href="index.html">Frontpage</a>
           <a class="account-link logout-link" href="#" id="logout-link">Logout</a>
         </nav>
       </div>
     </header>
 
+    <!-- Wallet tools for adding virtual money and linking to support resources. -->
     <section class="wallet-page">
-      <a class="back-link" href="index.html">Back to frontpage</a>
-      <p class="eyebrow">No real money</p>
-      <h2>Add virtual money</h2>
-      <p>
-        This balance is only play money for this school project. It cannot be
-        bought, withdrawn, sold, or exchanged for anything real.
-      </p>
+      <h2>Fill up your balance</h2>
+      <!-- Responsible gambling banner and ROFUS link. -->
+      <aside class="responsible-panel">
+        <div class="responsible-icon" aria-hidden="true">◆</div>
+        <div>
+          <h2>ROFUS and responsible play</h2>
+          <p>
+            If gambling starts to feel stressful, hard to control, or no longer fun,
+            take a break and use official protection tools before you continue.
+          </p>
+        </div>
+        <a class="rofus-card" href="https://www.spillemyndigheden.dk/rofus" target="_blank">
+          <img
+            src="https://www.spillemyndigheden.dk/uploads/styles/cropped_style/public/2018-12/spm-m%C3%A6rket-centered_0.jpg?itok=l9rOKFnd"
+            alt="ROFUS">
+          <span>Go to ROFUS</span>
+        </a>
+      </aside>
 
+      <!-- Current virtual balance summary. -->
       <div class="wallet-balance-box">
-        <span>Current virtual balance</span>
+        <span>Current balance</span>
         <strong>$<span id="wallet-balance"></span></strong>
       </div>
 
+      <!-- Deposit and dummy withdraw controls. -->
       <div class="form-group">
-        <label for="topup-amount">Virtual amount, maximum $100 at a time</label>
+        <label for="topup-amount">Fill up your balance, maximum $100 at a time</label>
         <input type="number" id="topup-amount" min="1" max="100" value="25">
       </div>
-      <button id="topup-btn" class="submit-btn">Add virtual money</button>
+      <div class="wallet-actions">
+        <button id="topup-btn" class="submit-btn">Deposit</button>
+        <button id="withdraw-btn" class="submit-btn secondary-action-btn" type="button">Withdraw</button>
+      </div>
       <div class="status-msg" id="wallet-message"></div>
     </section>
 
+    <!-- Secondary reminder that topping up is a good moment to pause. -->
     <section class="responsible-mini">
-      <strong>Responsible play:</strong>
-      Adding more virtual money is a good moment to pause and ask if you still want to play.
+      <strong>Play responsibly</strong>
+      Depositing more money is a good moment to pause and ask if you still want to play.
       <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">ROFUS</a>
     </section>
   </main>
