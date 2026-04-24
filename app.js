@@ -1,8 +1,10 @@
+// Shared game and wallet state used across the main app pages.
 const STARTING_BALANCE = 100;
 const BALANCE_STORAGE_KEY = 'll_virtual_balance';
 let balance = loadBalance();
 let currentGame = null;
 
+// Symbols and payout tables used by the slot and plinko games.
 const slotSymbols = [
     { name: 'Cherry', icon: '\u{1F352}' },
     { name: 'Lemon', icon: '\u{1F34B}' },
@@ -15,6 +17,7 @@ const slotSymbols = [
 const PLINKO_ROWS = 10;
 const PLINKO_PRIZES = [20, 10, 5, 1, 0, 0, 1, 5, 10, 20];
 
+// Updates any visible balance display in the page header or game layout.
 function updateBalance() {
     const balanceEl = document.getElementById('balance');
     if (balanceEl) {
@@ -22,25 +25,30 @@ function updateBalance() {
     }
 }
 
+// Loads the saved virtual balance or falls back to the starting amount.
 function loadBalance() {
     const savedBalance = Number(localStorage.getItem(BALANCE_STORAGE_KEY));
     return Number.isFinite(savedBalance) ? savedBalance : STARTING_BALANCE;
 }
 
+// Saves the current virtual balance to browser storage.
 function saveBalance() {
     localStorage.setItem(BALANCE_STORAGE_KEY, balance.toFixed(2));
 }
 
+// Reads the current bet input and keeps it within the minimum allowed value.
 function getBet() {
     let bet = Number(document.getElementById('bet-amount').value);
     if (isNaN(bet) || bet < 1) bet = 1;
     return bet;
 }
 
+// Fills the bet input with the largest whole-number bet the user can place.
 function setMaxBet() {
     document.getElementById('bet-amount').value = Math.floor(balance);
 }
 
+// Renders the selected game UI inside the shared game container.
 function showGame(type, shouldScroll = true) {
     const section = document.getElementById('game-section');
     currentGame = type;
@@ -89,6 +97,7 @@ function showGame(type, shouldScroll = true) {
     if (shouldScroll) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// Runs the slot machine animation, checks the result, and applies winnings.
 function playSlotUI() {
     const bet = getBet();
     if (bet > balance) {
@@ -158,6 +167,7 @@ function playSlotUI() {
     animateReels();
 }
 
+// Draws a single SVG dice face based on the rolled number.
 function renderDiceFace(face) {
     const pips = [
         [],
@@ -181,6 +191,7 @@ function renderDiceFace(face) {
     `;
 }
 
+// Animates a dice roll, then pays out if the player lands on six.
 function playDiceUI() {
     const bet = getBet();
     if (bet > balance) {
@@ -220,6 +231,7 @@ function playDiceUI() {
     rollDiceAnim();
 }
 
+// Builds the plinko board and highlights the current ball position during animation.
 function renderPlinkoBoard(ballPath = null) {
     const container = document.getElementById('plinko-board-container');
     let html = '';
@@ -258,6 +270,7 @@ function renderPlinkoBoard(ballPath = null) {
     container.innerHTML = html;
 }
 
+// Simulates a plinko drop, animates the path, and handles the final payout.
 function playPlinkoUI() {
     const bet = getBet();
     if (bet > balance) {
@@ -310,10 +323,12 @@ function playPlinkoUI() {
     animateDrop();
 }
 
+// Shows a short game result message inside the given result element.
 function showResult(id, text) {
     document.getElementById(id).textContent = text;
 }
 
+// Reads the signed-in user from session storage.
 function getCurrentUser() {
     const user = sessionStorage.getItem('ll_user');
 
@@ -329,6 +344,7 @@ function getCurrentUser() {
     }
 }
 
+// Updates the header account area for either a signed-in user or a guest.
 function updateUserBar(user) {
     const greetingEl = document.getElementById('user-greeting');
     const labelEl = document.querySelector('.account-label');
@@ -359,6 +375,7 @@ function updateUserBar(user) {
     }
 }
 
+// Protects pages that should only be available after login.
 function requireLoggedInUser() {
     const user = getCurrentUser();
 
@@ -371,26 +388,31 @@ function requireLoggedInUser() {
     return user;
 }
 
+// Signs the user out and sends them back to the login page.
 function logout(event) {
     event.preventDefault();
     sessionStorage.removeItem('ll_user');
     window.location.href = 'login.html';
 }
 
+// Wires up the wallet page controls for deposit and dummy withdraw actions.
 function setupWalletPage() {
     const walletBalance = document.getElementById('wallet-balance');
     const topupInput = document.getElementById('topup-amount');
     const topupButton = document.getElementById('topup-btn');
+    const withdrawButton = document.getElementById('withdraw-btn');
     const walletMessage = document.getElementById('wallet-message');
     if (!walletBalance || !topupInput || !topupButton || !walletMessage) {
         return;
     }
 
+    // Keeps the wallet balance box and top header balance in sync.
     function updateWalletBalance() {
         walletBalance.textContent = balance.toFixed(2);
         updateBalance();
     }
 
+    // Adds virtual money to the balance after validating the entered amount.
     topupButton.addEventListener('click', () => {
         const amount = Number(topupInput.value);
 
@@ -406,9 +428,19 @@ function setupWalletPage() {
         walletMessage.textContent = `Added $${amount.toFixed(2)} virtual money. Take a break before adding more.`;
         walletMessage.className = 'status-msg success';
     });
+
+    // Shows a placeholder message for the future withdraw flow.
+    if (withdrawButton) {
+        withdrawButton.addEventListener('click', () => {
+            walletMessage.textContent = 'This button would allow you to withdraw the money in your balance.';
+            walletMessage.className = 'status-msg success';
+        });
+    }
+
     updateWalletBalance();
 }
 
+// Sets up shared page behavior for headers, auth, games, and wallet controls.
 function setupApp() {
     const requiresAuth = document.body.dataset.requiresAuth === 'true';
     const currentUser = getCurrentUser();
@@ -448,4 +480,5 @@ function setupApp() {
     setupWalletPage();
 }
 
+// Starts the shared app logic after the page HTML has loaded.
 document.addEventListener('DOMContentLoaded', setupApp);
