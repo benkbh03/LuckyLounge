@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic metadata plus the auth page stylesheet and script. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LuckyLounge - Login</title>
@@ -9,16 +10,19 @@
 </head>
 <body>
   <main id="app" class="auth-app">
+    <!-- Brand header used above the login and registration forms. -->
     <header>
-      <h1>LuckyLounge</h1>
+      <h1><a href="index.html">LuckyLounge</a></h1>
       <p>Ethical &amp; Responsible Gambling for Everyone</p>
     </header>
 
+    <!-- Tab buttons that switch between login and registration. -->
     <div class="tab-row">
       <button class="tab-btn active" id="tab-login" data-tab="login">Login</button>
       <button class="tab-btn" id="tab-register" data-tab="register">Register</button>
     </div>
 
+    <!-- Existing user login form. -->
     <div id="panel-login" class="panel">
       <div class="form-group">
         <label for="login-email">Email</label>
@@ -38,6 +42,7 @@
       <div class="status-msg" id="login-msg"></div>
     </div>
 
+    <!-- New account registration form. -->
     <div id="panel-register" class="panel is-hidden">
       <div class="form-group">
         <label for="reg-username">Username</label>
@@ -75,6 +80,7 @@
       <div class="status-msg" id="register-msg"></div>
     </div>
 
+    <!-- Footer-style support note with a direct ROFUS link. -->
     <hr class="divider">
 
     <div class="responsible-note">
@@ -88,6 +94,7 @@
     </div>
   </main>
 
+  <!-- Modal window that displays the full terms and conditions. -->
   <div class="modal-overlay" id="terms-modal">
     <div class="modal-box" id="terms-box">
       <button class="modal-close" id="terms-close">Close</button>
