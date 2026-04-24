@@ -1,12 +1,15 @@
+// Legacy standalone plinko settings and local balance state.
 const PLINKO_COLUMNS = 7;
 const PLINKO_ROWS = 8;
 const PLINKO_PRIZES = [0,8,12,50,12,8,0];
 let balance = 100;
 
+// Updates the visible balance for the standalone plinko page.
 function updateBalance() {
     document.getElementById('balance').textContent = balance.toFixed(2);
 }
 
+// Builds the standalone plinko board and marks the ball path while it falls.
 function renderPlinkoBoard(ballPath = null) {
     const container = document.getElementById('plinko-board-container');
     let html = "";
@@ -31,6 +34,7 @@ function renderPlinkoBoard(ballPath = null) {
     container.innerHTML = html;
 }
 
+// Simulates one plinko round, animates the drop, and handles the prize.
 function playPlinko() {
     const betInput = document.getElementById('bet-amount');
     let betAmt = Number(betInput.value);
@@ -76,7 +80,7 @@ function playPlinko() {
     animateDrop();
 }
 
-// Initial setup
+// Runs the first board render when the standalone page loads.
 window.onload = () => {
     updateBalance();
     renderPlinkoBoard();
