@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic metadata plus the shared stylesheet and app logic. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LuckyLounge - Slot Machine</title>
@@ -9,8 +10,9 @@
 </head>
 <body data-game-page="slot" data-requires-auth="true">
   <main id="app" class="game-app">
+    <!-- Shared game-page header with account actions and timer. -->
     <header>
-      <h1>LuckyLounge</h1>
+      <h1><a href="index.html">LuckyLounge</a></h1>
       <p>Slot Machine</p>
       <div id="user-bar" class="user-bar">
         <div class="account-pill">
@@ -18,15 +20,15 @@
           <strong id="user-greeting"></strong>
         </div>
         <nav class="account-actions" aria-label="Account actions">
-          <a class="account-link" href="wallet.html">Virtual money</a>
+          <span class="timer-pill">Timer <strong>00:17:38</strong></span>
+          <a class="account-link" href="wallet.html">Balance</a>
           <a class="account-link logout-link" href="#" id="logout-link">Logout</a>
         </nav>
       </div>
     </header>
 
+    <!-- Compact introduction that explains the slot game. -->
     <section class="game-page-intro">
-      <a class="back-link" href="index.html">Back to frontpage</a>
-      <p class="eyebrow">Play money only</p>
       <h2>Slot Machine</h2>
       <p>
         Spin three reels with virtual money. Choose a small bet and remember:
@@ -34,12 +36,14 @@
       </p>
     </section>
 
+    <!-- Lightweight reminder to keep play controlled. -->
     <section class="responsible-mini">
       <strong>Responsible play:</strong>
       Stop when it stops being fun.
       <a href="https://www.spillemyndigheden.dk/rofus" target="_blank">ROFUS</a>
     </section>
 
+    <!-- Dashboard area for the bet controls and injected game UI. -->
     <section id="dashboard-section">
       <div class="play-controls">
         <div class="balance-row">
