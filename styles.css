@@ -1112,6 +1112,11 @@ input[type="number"]:focus {
   gap: 12px;
 }
 
+/* Makes the limits button span the full width under the main wallet actions. */
+.wallet-limits-btn {
+  grid-column: 1 / -1;
+}
+
 /* Gives secondary wallet actions a quieter style. */
 .secondary-action-btn {
   background: #eef6ff;
