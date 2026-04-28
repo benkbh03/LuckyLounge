@@ -54,7 +54,7 @@
         <strong>$<span id="wallet-balance"></span></strong>
       </div>
 
-      <!-- Deposit and dummy withdraw controls. -->
+      <!-- Deposit, withdraw, and limit-setting controls. -->
       <div class="form-group">
         <label for="topup-amount">Fill up your balance, maximum $100 at a time</label>
         <input type="number" id="topup-amount" min="1" max="100" value="25">
@@ -62,6 +62,7 @@
       <div class="wallet-actions">
         <button id="topup-btn" class="submit-btn">Deposit</button>
         <button id="withdraw-btn" class="submit-btn secondary-action-btn" type="button">Withdraw</button>
+        <button id="set-limits-btn" class="submit-btn secondary-action-btn wallet-limits-btn" type="button">SET LIMITS</button>
       </div>
       <div class="status-msg" id="wallet-message"></div>
     </section>
