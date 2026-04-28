@@ -395,12 +395,13 @@ function logout(event) {
     window.location.href = 'login.html';
 }
 
-// Wires up the wallet page controls for deposit and dummy withdraw actions.
+// Wires up the wallet page controls for deposit and dummy helper actions.
 function setupWalletPage() {
     const walletBalance = document.getElementById('wallet-balance');
     const topupInput = document.getElementById('topup-amount');
     const topupButton = document.getElementById('topup-btn');
     const withdrawButton = document.getElementById('withdraw-btn');
+    const setLimitsButton = document.getElementById('set-limits-btn');
     const walletMessage = document.getElementById('wallet-message');
     if (!walletBalance || !topupInput || !topupButton || !walletMessage) {
         return;
@@ -433,6 +434,14 @@ function setupWalletPage() {
     if (withdrawButton) {
         withdrawButton.addEventListener('click', () => {
             walletMessage.textContent = 'This button would allow you to withdraw the money in your balance.';
+            walletMessage.className = 'status-msg success';
+        });
+    }
+
+    // Shows a placeholder message for a future responsible-play limits tool.
+    if (setLimitsButton) {
+        setLimitsButton.addEventListener('click', () => {
+            walletMessage.textContent = 'This button would allow you to set time and money limits';
             walletMessage.className = 'status-msg success';
         });
     }
