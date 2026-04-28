@@ -132,7 +132,7 @@ h1 {
 
 /* Adds the small decorative mark beside the logo. */
 h1::before {
-  content: "+";
+  content: "\2618";
   color: var(--teal);
   -webkit-text-fill-color: var(--teal);
   font-size: 0.82em;
